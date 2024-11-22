@@ -55,6 +55,7 @@ SOURCES += 	$(ERPC_C_ROOT)/infra/erpc_arbitrated_client_manager.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_client_manager.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_crc16.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_framed_transport.cpp \
+			$(ERPC_C_ROOT)/infra/erpc_nocrc_framed_transport.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_message_buffer.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_message_loggers.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_server.cpp \
@@ -87,6 +88,7 @@ HEADERS += 	$(ERPC_C_ROOT)/config/erpc_config.h \
 			$(ERPC_C_ROOT)/infra/erpc_common.h \
 			$(ERPC_C_ROOT)/infra/erpc_version.h \
 			$(ERPC_C_ROOT)/infra/erpc_framed_transport.hpp \
+			$(ERPC_C_ROOT)/infra/erpc_nocrc_framed_transport.hpp \
 			$(ERPC_C_ROOT)/infra/erpc_manually_constructed.hpp \
 			$(ERPC_C_ROOT)/infra/erpc_message_buffer.hpp \
 			$(ERPC_C_ROOT)/infra/erpc_message_loggers.hpp \

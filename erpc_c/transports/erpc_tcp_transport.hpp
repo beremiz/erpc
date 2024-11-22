@@ -13,7 +13,7 @@
 #include <winsock2.h>
 #endif
 
-#include "erpc_framed_transport.hpp"
+#include "erpc_nocrc_framed_transport.hpp"
 #include "erpc_threading.h"
 
 /*!
@@ -32,7 +32,7 @@ namespace erpc {
  *
  * @ingroup tcp_transport
  */
-class TCPTransport : public FramedTransport
+class TCPTransport : public NoCRCFramedTransport
 {
 public:
     /*!
@@ -97,8 +97,8 @@ protected:
     Thread m_serverThread; /*!< Pointer to server thread. */
     bool m_runServer;      /*!< Thread is executed while this is true. */
 
-    using FramedTransport::underlyingReceive;
-    using FramedTransport::underlyingSend;
+    using NoCRCFramedTransport::underlyingReceive;
+    using NoCRCFramedTransport::underlyingSend;
 
     /*!
      * @brief This function connect client to the server.

@@ -49,6 +49,48 @@ class Transport(object):
         raise NotImplementedError()
 
 
+class NoCRCFramedTransport(Transport):
+    HEADER_LEN = 2
+
+    def __init__(self):
+        super(NoCRCFramedTransport, self).__init__()
+        self._sendLock = threading.Lock()
+        self._receiveLock = threading.Lock()
+
+    def send(self, message):
+        try:
+            self._sendLock.acquire()
+
+            messageLength = len(message)
+
+            header = bytearray(struct.pack('<H', messageLength))
+            assert len(header) == self.HEADER_LEN
+            self._base_send(header + message)
+        finally:
+            self._sendLock.release()
+
+    def receive(self):
+        try:
+            self._receiveLock.acquire()
+
+            # Read fixed size header containing the message length.
+            headerData = self._base_receive(self.HEADER_LEN)
+            messageLength, = struct.unpack('<H', headerData)
+
+            # Now we know the length, read the rest of the message.
+            data = self._base_receive(messageLength)
+
+            return data
+        finally:
+            self._receiveLock.release()
+
+    def _base_send(self, data):
+        raise NotImplementedError()
+
+    def _base_receive(self):
+        raise NotImplementedError()
+
+
 class FramedTransport(Transport):
     HEADER_LEN = 6
 
@@ -112,7 +154,6 @@ class FramedTransport(Transport):
     def _base_receive(self):
         raise NotImplementedError()
 
-
 class SerialTransport(FramedTransport):
     def __init__(self, url, baudrate, **kwargs):
         super(SerialTransport, self).__init__()
@@ -137,7 +178,7 @@ class ConnectionClosed(Exception):
     pass
 
 
-class TCPTransport(FramedTransport):
+class TCPTransport(NoCRCFramedTransport):
     def __init__(self, host, port, isServer):
         super(TCPTransport, self).__init__()
         self._host = host
