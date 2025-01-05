@@ -13,7 +13,7 @@ config ERPC
 	help
 	  This option enables the eRPC library
 	depends on CPP
-	depends on FULL_LIBCPP_SUPPORTED
+	depends on REQUIRES_FULL_LIBCPP
 
 config ZEPHYR_BUILD
 	bool
