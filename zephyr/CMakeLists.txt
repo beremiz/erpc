@@ -26,6 +26,7 @@ if (CONFIG_ERPC)
     ${ERPC_DIR}/infra/erpc_client_manager.cpp
     ${ERPC_DIR}/infra/erpc_crc16.cpp
     ${ERPC_DIR}/infra/erpc_framed_transport.cpp
+    ${ERPC_DIR}/infra/erpc_nocrc_framed_transport.cpp
     ${ERPC_DIR}/infra/erpc_message_buffer.cpp
     ${ERPC_DIR}/infra/erpc_message_loggers.cpp
     ${ERPC_DIR}/infra/erpc_pre_post_action.cpp
