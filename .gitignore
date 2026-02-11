@@ -115,3 +115,5 @@ vs_BuildTools*
 
 # Zephyr's repo link
 __repo__/
+
+.vscode/
